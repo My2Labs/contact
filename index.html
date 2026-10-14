@@ -7,7 +7,6 @@ const status = document.getElementById('status');
 const button = document.getElementById('save');
 function decode64url(x) { const b = atob(x.replace(/-/g,'+').replace(/_/g,'/') + '='.repeat((4-x.length%4)%4)); return Uint8Array.from(b, c=>c.charCodeAt(0)); }
 async function getCard() {
-  // URL fragment is NOT sent in an HTTP request. It is still readable by anyone with the URL.
   const secret = new URLSearchParams(location.hash.slice(1)).get('key');
   if (!secret) throw new Error('This contact link is missing its access key.');
   const response = await fetch('./contact.enc.json', { cache: 'no-store' });
